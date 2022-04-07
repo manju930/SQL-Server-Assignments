@@ -72,4 +72,4 @@ Select CONCAT(A.Firstname,A.LastName) as [Employee_Name],CONCAT(B.Firstname,B.La
 	
 --Print the Total price of orders which have the products supplied by 'Exotic Liquids' if the price is > 50 and also print it by Shipping company's Name
 
-SELECT sum(TotalAmount),ShippedName from order O left join orderItem OI on o.id = OI.OrderId where and O.ShippedName = 'Exotic Liquids' and OI.UnitPrice > 50  Group by ShippedName;
+SELECT sum(TotalAmount),ShippedName from order O left join orderItem OI on o.id = OI.OrderId where  O.ShippedName = 'Exotic Liquids' and OI.UnitPrice > 50  Group by ShippedName;
