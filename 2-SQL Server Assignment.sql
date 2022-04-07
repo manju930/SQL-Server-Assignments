@@ -58,8 +58,18 @@ ADD isShippingOperation bit(40);
 Select ShippedName from Order where isShippingOperation = 1;
 	
 --Print all Employees with Manager Name
+ALTER TABLE Employee
+ADD ManagerId INT; --Employee.EmployeeId
+
+Select CONCAT(A.Firstname,A.LastName) as [Employee_Name],CONCAT(B.Firstname,B.LastName) as [Manager_Name] from Employee A join Employee B on A.Employeeid = B.ManagerId;
 
 --Print the bill for a given order id .bill should contain Productname, Categoryname,price after discount
-
+	--Adding Categoryname to the Product TABLE
+	ALTER TABLE Product
+	ADD Categoryname nvarchar(40);
+	
+	SELECT P.ProductName,P.Categoryname,O.TotalAmount from Order O join OrderItem OI on O.id = OI.orderId join Product P on P.id = OI.ProductId where O.Id = '83733' -- Input bill Number
+	
 --Print the Total price of orders which have the products supplied by 'Exotic Liquids' if the price is > 50 and also print it by Shipping company's Name
 
+SELECT sum(TotalAmount),ShippedName from order O left join orderItem OI on o.id = OI.OrderId where and O.ShippedName = 'Exotic Liquids' and OI.UnitPrice > 50  Group by ShippedName;
